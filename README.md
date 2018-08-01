@@ -1,7 +1,7 @@
-This is vue demo lists.
+ï»¿This is vue demo lists.
 
 
-//for POSsystem  ÊÕÒøÌ¨
+//for POSsystem  æ”¶é“¶å°
  
 //run  
 
@@ -10,4 +10,4 @@ This is vue demo lists.
  cnpm run dev
 
 
-//for vuetranslate  ÔÚÏß·­Òë
+//for vuetranslate  åœ¨çº¿ç¿»è¯‘
