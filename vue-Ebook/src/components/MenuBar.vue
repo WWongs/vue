@@ -1,73 +1,80 @@
 <template>
-	<div class="menuBar"> 
-		<div class="menu-wrapper" v-show="ifShowTitleAndMenu" :class="{'hideBoxShadow':ifSettingShow || !ifShowTitleAndMenu}">
-	    	<div class="icon-wrapper" @click="showSetting(3)">
-				<span class="icon-menu icon"></span>
+	<transition name="slide-down">
+		<div class="menuBar"> 
+			<div class="menu-wrapper" v-show="ifShowTitleAndMenu" :class="{'hideBoxShadow':ifSettingShow || !ifShowTitleAndMenu}">
+				<div class="icon-wrapper" @click="showSetting(3)">
+					<span class="icon-menu icon"></span>
+				</div>
+				<div class="icon-wrapper" @click="showSetting(2)">
+					<span class="icon-equalizer icon"></span>
+				</div>
+				<div class="icon-wrapper" @click="showSetting(1)">
+					<span class="icon-sun icon"></span>
+				</div>
+				<div class="icon-wrapper" @click="showSetting(0)">
+					<span class="icon-folder-upload icon"></span>
+				</div>
 			</div>
-			<div class="icon-wrapper" @click="showSetting(2)">
-				<span class="icon-equalizer icon"></span>
+			
+			<div class="setting_wrapper" v-show="ifSettingShow"> 
+				<!--字体的大小-->
+				<div class="setting_font_size" v-if="showTag == 0">
+					<div class="preview" :style="{fontSize:fontSizeList[0].fontSize + 'px'}">A</div>
+					<div class="select">
+						<div class="select_wrapper" v-for="(item,index) in fontSizeList" :key="index" @click="setFontSize(item.fontSize)"> 
+							<div class="line"></div>
+							<div class="point_wrapper">
+								<div class="point" v-show="defaultFontSize === item.fontSize">
+									<div class="small_point"></div>
+								</div>
+							</div>
+							<div class="line"></div>
+						</div>
+					</div>
+					<div class="preview" :style="{fontSize:fontSizeList[fontSizeList.length-1].fontSize + 'px'}">A</div>
+				</div>
+				<!--背景颜色-->
+				<div class="setting_theme" v-else-if="showTag === 1">
+					<div class="setting_theme_item" v-for="(item,index) in themeList" :key="index" @click='setTheme(index)'>
+						<div class="preview" :style="{background:item.style.body.background}" :class="{'no_border':item.style.body.background == '#fff'}"></div>
+						<div class="text" :class="{'selected':index == defaultTheme}">{{item.name}}</div>
+					</div>
+				</div>
+				
+				<!--进度条-->
+				
+				<div class="setting_progress" v-else-if="showTag === 2">
+					<div class="progress_wrapper">
+						<input type="range" class="progress"
+											max="100"
+											min="0"
+											step="1"
+											@change="onProgressChange($event.target.value)"
+											@input="onProgressInput($event.target.value)"
+											:value="progress"
+											:disabled="!bookAvailable"
+											ref="progress"
+						/>
+					</div>	
+					<div class="text_wrapper">
+						<span>{{bookAvailable ? progress + '%' : '加载中...'}}</span>
+					</div>
+				</div>				
 			</div>
-			<div class="icon-wrapper" @click="showSetting(1)">
-				<span class="icon-sun icon"></span>
+			
+			<transition name="slide-down">
+				<contentBar :ifShowContent="ifShowContent"
+							v-show="ifShowContent"	
+							:navigation="navigation"
+							@jumpTo="jumpTo"
+							:bookAvailable="bookAvailable"
+				></contentBar>
+			</transition>
+			<div class="content_mask" v-show="ifShowContent" @click="hideContent">
 			</div>
-			<div class="icon-wrapper" @click="showSetting(0)">
-				<span class="icon-folder-upload icon"></span>
-			</div>
-	    </div>
-	    <div class="setting_wrapper" v-show="ifSettingShow"> 
-	    	<!--字体的大小-->
-	    	<div class="setting_font_size" v-if="showTag == 0">
-	    		<div class="preview" :style="{fontSize:fontSizeList[0].fontSize + 'px'}">A</div>
-		    	<div class="select">
-		    		<div class="select_wrapper" v-for="(item,index) in fontSizeList" :key="index" @click="setFontSize(item.fontSize)"> 
-		    			<div class="line"></div>
-		    			<div class="point_wrapper">
-		    				<div class="point" v-show="defaultFontSize === item.fontSize">
-		    					<div class="small_point"></div>
-		    				</div>
-		    			</div>
-		    			<div class="line"></div>
-		    		</div>
-		    	</div>
-	    		<div class="preview" :style="{fontSize:fontSizeList[fontSizeList.length-1].fontSize + 'px'}">A</div>
-	    	</div>
-	    	<!--背景颜色-->
-	    	<div class="setting_theme" v-else-if="showTag === 1">
-	    		<div class="setting_theme_item" v-for="(item,index) in themeList" :key="index" @click='setTheme(index)'>
-	    			<div class="preview" :style="{background:item.style.body.background}" :class="{'no_border':item.style.body.background == '#fff'}"></div>
-	    			<div class="text" :class="{'selected':index == defaultTheme}">{{item.name}}</div>
-	    		</div>
-	    	</div>
-	    	
-	    	<!--进度条-->
-	    	<div class="setting_progress" v-else-if="showTag === 2">
-	    		<div class="progress_wrapper">
-	    			<input type="range" class="progress"
-	    			                    max="100"
-	    			                    min="0"
-	    			                    step="1"
-	    			                    @change="onProgressChange($event.target.value)"
-	    			                    @input="onProgressInput($event.target.value)"
-	    			                    :value="progress"
-	    			                    :disabled="!bookAvailable"
-	    			                    ref="progress"
-	    			 />
-	    		</div>	
-	    		<div class="text_wrapper">
-	    			<span>{{bookAvailable ? progress + '%' : '加载中...'}}</span>
-	    		</div>
-	    	</div>
-	    </div>
-	    
-	    <contentBar :ifShowContent="ifShowContent"
-                    v-show="ifShowContent"	
-                    :navigation="navigation"
-                    @jumpTo="jumpTo"
-                    :bookAvailable="bookAvailable"
-        ></contentBar>
-	    <div class="content_mask" v-show="ifShowContent" @click="hideContent">
-	    </div>
-	</div>
+			
+		</div>
+	</transition>
 </template>
 
 <script>
@@ -123,6 +130,15 @@
 
 <style lang="scss">
 	@import '../assets/styles/global';
+	.slide-down-enter{
+		transform: translate3d(0, -100%, 0);
+	}
+	.slide-down-enter-to{
+		transform: translate3d(0, 0, 0);
+	}
+	.slide-down-enter-active{
+		transition: all .3s;
+	}
 	.menu-wrapper{
 		background-color: white;
 		z-index: 101;
@@ -141,9 +157,7 @@
 		flex: 1;
 		@include center;
 	}
-	.menuBar{
-		
-	}
+	
 	.menuBar .setting_wrapper{
 		z-index: 101;
 		position: absolute;

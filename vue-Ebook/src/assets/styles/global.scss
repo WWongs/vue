@@ -17,12 +17,24 @@ $fontSize: 37.5;
     font-size: px2rem(20);
     cursor: pointer;
 }
-.slide-down-enter{
+.slide-down-enter,.slide-down-leave-to{
     transform: translate3d(0, -100%, 0);
 }
-.slide-down-enter-to{
+.slide-down-enter-to,.slide-down-leave{
     transform: translate3d(0, 0, 0);
 }
-.slide-down-enter-active{
-    transform: all .3s;
+.slide-down-enter-active,.slide-down-leave-active{
+    transition: all .3s;
+}
+
+
+
+.fade-enter{
+    transform: translate3d(0, -100%, 0);
+}
+.fade-enter-to{
+    transform: translate3d(0, 0, 0);
+}
+.fade-enter-active{
+    transition: all .3s;
 }
