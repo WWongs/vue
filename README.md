@@ -1,5 +1,9 @@
 ﻿这是一些用vue构建的项目。
 
+//vueMenegerSysDemo 订单后台管理系统
+
+  使用vue2.0 + bootstrap + jQuery + vue-resource
+
 
 //for POSsystem  收银台
  
