@@ -1,39 +1,26 @@
-﻿这是一些用vue构建的项目。
+﻿这是一些用vue-cli构建的项目。
 
-//vueMenegerSysDemo 订单后台管理系统
+// vueMenegerSysDemo 订单后台管理系统
 
   使用vue2.0 + bootstrap + jQuery + vue-resource
 
 
-//for POSsystem  收银台
+// POSsystem  收银台demo
  
-//run  
-
- cnpm install
-
- cnpm run dev
-
  (ps)其中商品信息从外部网站获取  可能现在商品信息获取不到
 
 
-//for vuetranslate  在线翻译
-
-//run  
-
- cnpm install
-
- cnpm run dev
+// vuetranslate  在线翻译   Yandex Technologies网站提供的翻译api接口
 
 
-//for shoppingCar  购物车案例
+// shoppingCar  购物车案例demo (无运用vue-cli)
 
 
-//for vue-Ebook   电子书阅读器
+// vue-Ebook   电子书阅读器
 
-//run  
+ (ps) 主要使用epubjs引擎进行构建epub格式的电子书
+ 
+ 
+// vueZhihuDemo   知乎日报demo 
 
- cnpm install
-
- cnpm run dev
-
- （ps）主要使用epubjs引擎进行构建epub格式的电子书
+  (ps) github Xiao Liang 提供的api接口
