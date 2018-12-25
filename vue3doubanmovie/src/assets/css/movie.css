@@ -1,0 +1,85 @@
+#movie {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+}
+
+.banner {
+  width: 100%;
+  height: 6.5rem;
+}
+
+.banner .van-swipe {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.banner .van-swipe .van-swipe-item {
+  width: 100%;
+  height: 100%;
+}
+
+.banner .van-swipe .van-swipe-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.banner .van-swipe .custom-indicator {
+  position: absolute;
+  bottom: 0.1rem;
+  right: 0.1rem;
+  width: 1.5rem;
+  text-align: center;
+  color: #fff;
+  background: rgb(0, 0, 0, .5);
+}
+
+.van-loading {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  z-index: 4;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: rgb(0, 0, 0, .5);
+}
+
+.list {
+  margin-top: 0.3rem;
+  background-color: #fff;
+  height: 4.65rem;
+}
+
+.list .title {
+  font-size: 0.4rem;
+  line-height: 0.6rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.list .itemCon {
+  height: 4.05rem;
+  width: auto;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.list .itemCon .item {
+  display: inline-block;
+  width: 2.5rem;
+  height: 100%;
+  margin-right: 0.1rem;
+}
+
+.list .itemCon .item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
